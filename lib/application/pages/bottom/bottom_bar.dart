@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:to_do/application/pages/bottom/bottom_state.dart';
 import 'package:to_do/application/pages/home.dart';
-
-final indexProvider = StateProvider<int>((ref) {
-  return 0;
-});
 
 class BottomBar extends ConsumerWidget {
   const BottomBar({super.key});
