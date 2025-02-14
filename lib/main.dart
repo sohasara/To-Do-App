@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:to_do/application/pages/home.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:to_do/application/pages/bottom/bottom_bar.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: BottomBar(),
     );
   }
 }
