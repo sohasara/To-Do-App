@@ -5,8 +5,16 @@ class TextScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("data"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Text Screen"),
+      ),
+      body: const Column(
+        children: [
+          TextField(),
+          TextField(),
+        ],
+      ),
     );
   }
 }
