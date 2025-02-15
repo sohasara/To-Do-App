@@ -31,6 +31,34 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.only(top: 10.0, left: 10, right: 10),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.indigo.shade100,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const ListTile(
+                      title: Text('Title'),
+                      subtitle: Text('Description'),
+                      trailing: Icon(Icons.delete),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
