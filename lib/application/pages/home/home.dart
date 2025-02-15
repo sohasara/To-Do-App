@@ -23,7 +23,13 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.indigo.shade300,
         centerTitle: true,
-        title: const Text('To Do App'),
+        title: const Text(
+          'To Do App',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
