@@ -51,7 +51,6 @@ class HomePage extends StatelessWidget {
                     child: const ListTile(
                       title: Text('Title'),
                       subtitle: Text('Description'),
-                      trailing: Icon(Icons.delete),
                     ),
                   ),
                 );
