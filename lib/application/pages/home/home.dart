@@ -48,9 +48,13 @@ class HomePage extends StatelessWidget {
                       color: Colors.indigo.shade100,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const ListTile(
-                      title: Text('Title'),
-                      subtitle: Text('Description'),
+                    child: ListTile(
+                      title: const Text('Title'),
+                      subtitle: const Text('Description'),
+                      trailing: Checkbox(
+                        value: true,
+                        onChanged: (value) {},
+                      ),
                     ),
                   ),
                 );
