@@ -14,23 +14,31 @@ class BottomBar extends ConsumerWidget {
       const Center(
         child: Text("add"),
       ),
+      const Center(
+        child: Text("add"),
+      ),
     ];
     return Scaffold(
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.indigo.shade300,
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black,
+        unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
+        iconSize: 30,
         currentIndex: selectedIndex,
         onTap: (value) => ref.read(indexProvider.notifier).state = value,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
+            icon: Icon(Icons.playlist_add_check),
+            label: 'completed',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'priority',
           ),
         ],
       ),
