@@ -13,7 +13,7 @@ class TextScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.indigo.shade50,
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigo.shade300,
         centerTitle: true,
         title: const Text(
           "Add Your Task",
@@ -72,7 +72,7 @@ class TextScreen extends ConsumerWidget {
                 return ChoiceChip(
                   label: Text(priority.toUpperCase()),
                   selected: selectedPriority == priority,
-                  selectedColor: Colors.indigo.shade400,
+                  selectedColor: Colors.indigo.shade300,
                   backgroundColor: Colors.grey.shade300,
                   labelStyle: TextStyle(
                     color: selectedPriority == priority
@@ -90,7 +90,7 @@ class TextScreen extends ConsumerWidget {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.indigo,
+                  backgroundColor: Colors.indigo.shade300,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
