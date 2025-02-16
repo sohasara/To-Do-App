@@ -97,11 +97,7 @@ class TextScreen extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 ),
-                onPressed: () {
-                  // You can use ref.read(priorityProvider) to get the selected value
-                  debugPrint(
-                      "Selected Priority: ${ref.read(priorityProvider)}");
-                },
+                onPressed: () {},
                 child: const Text(
                   'Add Task',
                   style: TextStyle(
