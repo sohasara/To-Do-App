@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TextScreen extends StatelessWidget {
+// State Provider for managing priority selection
+final priorityProvider = StateProvider<String>((ref) => 'medium');
+
+class TextScreen extends ConsumerWidget {
   const TextScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedPriority = ref.watch(priorityProvider);
+
     return Scaffold(
       backgroundColor: Colors.indigo.shade50,
       appBar: AppBar(
-        backgroundColor: Colors.indigo.shade300,
+        backgroundColor: Colors.indigo,
         centerTitle: true,
         title: const Text(
           "Add Your Task",
@@ -19,78 +25,90 @@ class TextScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextField(
+            TextField(
               decoration: InputDecoration(
                 labelText: 'Task Title',
-                border: OutlineInputBorder(),
+                labelStyle: TextStyle(color: Colors.indigo.shade700),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.indigo),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
               decoration: InputDecoration(
                 labelText: 'Description',
-                border: OutlineInputBorder(),
+                labelStyle: TextStyle(color: Colors.indigo.shade700),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.indigo),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               maxLines: 3,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             const Text(
               'Priority',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
+                color: Colors.indigo,
               ),
             ),
             const SizedBox(height: 8),
             Row(
-              children: [
-                Expanded(
-                  child: RadioListTile<String>(
-                    title: const Text('High'),
-                    value: 'high',
-                    groupValue: 'priority',
-                    onChanged: (value) {},
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: ['high', 'medium', 'low'].map((priority) {
+                return ChoiceChip(
+                  label: Text(priority.toUpperCase()),
+                  selected: selectedPriority == priority,
+                  selectedColor: Colors.indigo.shade400,
+                  backgroundColor: Colors.grey.shade300,
+                  labelStyle: TextStyle(
+                    color: selectedPriority == priority
+                        ? Colors.white
+                        : Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                Expanded(
-                  child: RadioListTile<String>(
-                    title: const Text('Mid'),
-                    value: 'medium',
-                    groupValue: 'priority',
-                    onChanged: (value) {},
-                  ),
-                ),
-                Expanded(
-                  child: RadioListTile<String>(
-                    title: const Text('Low'),
-                    value: 'low',
-                    groupValue: 'priority',
-                    onChanged: (value) {},
-                  ),
-                ),
-              ],
+                  onSelected: (selected) {
+                    ref.read(priorityProvider.notifier).state = priority;
+                  },
+                );
+              }).toList(),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 30),
             Center(
-              child: Container(
-                height: 45,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.indigo.shade300,
-                  borderRadius: BorderRadius.circular(8),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.indigo,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Add',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                onPressed: () {
+                  // You can use ref.read(priorityProvider) to get the selected value
+                  debugPrint(
+                      "Selected Priority: ${ref.read(priorityProvider)}");
+                },
+                child: const Text(
+                  'Add Task',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
               ),
