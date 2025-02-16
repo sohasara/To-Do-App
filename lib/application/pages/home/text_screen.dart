@@ -31,7 +31,7 @@ class TextScreen extends ConsumerWidget {
             TextField(
               decoration: InputDecoration(
                 labelText: 'Task Title',
-                labelStyle: TextStyle(color: Colors.indigo.shade700),
+                labelStyle: TextStyle(color: Colors.indigo.shade900),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.indigo),
                   borderRadius: BorderRadius.circular(12),
@@ -86,7 +86,7 @@ class TextScreen extends ConsumerWidget {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 40),
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -107,7 +107,7 @@ class TextScreen extends ConsumerWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 18,
                   ),
                 ),
               ),
