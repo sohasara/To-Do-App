@@ -38,18 +38,63 @@ class TextScreen extends StatelessWidget {
               maxLines: 3,
             ),
             const SizedBox(height: 16),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Priority',
-                border: OutlineInputBorder(),
+            const Text(
+              'Priority',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
-              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: RadioListTile<String>(
+                    title: const Text('High'),
+                    value: 'high',
+                    groupValue: 'priority',
+                    onChanged: (value) {},
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile<String>(
+                    title: const Text('Mid'),
+                    value: 'medium',
+                    groupValue: 'priority',
+                    onChanged: (value) {},
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile<String>(
+                    title: const Text('Low'),
+                    value: 'low',
+                    groupValue: 'priority',
+                    onChanged: (value) {},
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Add Task'),
-            ),
+            Center(
+              child: Container(
+                height: 45,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.indigo.shade300,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Add',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
