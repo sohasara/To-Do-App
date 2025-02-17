@@ -8,6 +8,8 @@ class TextScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final taskContriller = TextEditingController();
+    final descriptionController = TextEditingController();
     final selectedPriority = ref.watch(priorityProvider);
 
     return Scaffold(
@@ -29,6 +31,7 @@ class TextScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              controller: taskContriller,
               decoration: InputDecoration(
                 labelText: 'Task Title',
                 labelStyle: TextStyle(color: Colors.indigo.shade900),
@@ -43,6 +46,7 @@ class TextScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             TextField(
+              controller: descriptionController,
               decoration: InputDecoration(
                 labelText: 'Description',
                 labelStyle: TextStyle(color: Colors.indigo.shade700),
@@ -97,7 +101,9 @@ class TextScreen extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: const Text(
                   'Add Task',
                   style: TextStyle(
