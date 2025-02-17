@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:to_do/application/pages/home/task_state.dart';
 import 'package:to_do/application/pages/home/text_screen.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tasks = ref.watch(taskProvider);
+
     return Scaffold(
       drawer: const Drawer(),
       floatingActionButton: FloatingActionButton(
@@ -32,12 +36,12 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
+      body: tasks.isEmpty
+          ? const Center(child: Text("No tasks added yet!"))
+          : ListView.builder(
+              itemCount: tasks.length,
               itemBuilder: (context, index) {
+                final task = tasks[index];
                 return Padding(
                   padding:
                       const EdgeInsets.only(top: 10.0, left: 10, right: 10),
@@ -49,20 +53,21 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ListTile(
-                      title: const Text('Title'),
-                      subtitle: const Text('Description'),
+                      title: Text(task.title),
+                      subtitle: Text(task.description),
                       trailing: Checkbox(
-                        value: true,
-                        onChanged: (value) {},
+                        value: task.isCompleted,
+                        onChanged: (_) {
+                          ref
+                              .read(taskProvider.notifier)
+                              .toggleTaskCompletion(index);
+                        },
                       ),
                     ),
                   ),
                 );
               },
             ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:to_do/application/pages/home/task_state.dart';
+
 import 'text_area_state.dart';
 
 class TextScreen extends ConsumerWidget {
@@ -8,7 +10,7 @@ class TextScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final taskContriller = TextEditingController();
+    final taskController = TextEditingController();
     final descriptionController = TextEditingController();
     final selectedPriority = ref.watch(priorityProvider);
 
@@ -31,7 +33,7 @@ class TextScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              controller: taskContriller,
+              controller: taskController,
               decoration: InputDecoration(
                 labelText: 'Task Title',
                 labelStyle: TextStyle(color: Colors.indigo.shade900),
@@ -102,7 +104,13 @@ class TextScreen extends ConsumerWidget {
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                  final title = taskController.text.trim();
+                  final description = descriptionController.text.trim();
+
+                  if (title.isNotEmpty && description.isNotEmpty) {
+                    ref.read(taskProvider.notifier).addTask(title, description);
+                    Navigator.pop(context);
+                  }
                 },
                 child: const Text(
                   'Add Task',
@@ -113,7 +121,7 @@ class TextScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
