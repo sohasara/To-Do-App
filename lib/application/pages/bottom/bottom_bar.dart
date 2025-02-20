@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:to_do/application/pages/bottom/bottom_state.dart';
+import 'package:to_do/application/pages/completed_task/comp_task.dart';
 import 'package:to_do/application/pages/home/home.dart';
 
 class BottomBar extends ConsumerWidget {
@@ -11,9 +12,7 @@ class BottomBar extends ConsumerWidget {
     final int selectedIndex = ref.watch(indexProvider);
     final List<Widget> pages = <Widget>[
       const HomePage(),
-      const Center(
-        child: Text("add"),
-      ),
+      const CompTask(),
       const Center(
         child: Text("add"),
       ),
