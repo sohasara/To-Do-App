@@ -29,9 +29,13 @@ class CompTask extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ListTile(
-                    title: Text('Task $index'),
-                    subtitle: Text('Description of Task $index'),
-                    trailing: const Text('Date: 12/12/2021'),
+                    title: Text(
+                      'Task $index',
+                      style: const TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                    subtitle: const Text('Date: 12/12/2021'),
                   ),
                 ),
               );
