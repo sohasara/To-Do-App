@@ -53,6 +53,12 @@ class HomePage extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ListTile(
+                      leading: IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          ref.read(taskProvider.notifier).deleteTask(index);
+                        },
+                      ),
                       title: Text(task.title),
                       subtitle: Text(task.description),
                       trailing: Checkbox(

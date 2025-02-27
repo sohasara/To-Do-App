@@ -1,42 +1,53 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-class Task {
-  final String title;
-  final String description;
-  final bool isCompleted;
-
-  Task(
-      {required this.title,
-      required this.description,
-      this.isCompleted = false});
-
-  Task copyWith({String? title, String? description, bool? isCompleted}) {
-    return Task(
-      title: title ?? this.title,
-      description: description ?? this.description,
-      isCompleted: isCompleted ?? this.isCompleted,
-    );
-  }
-}
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:to_do/data/add_task_db.dart';
 
 final taskProvider = StateNotifierProvider<TaskNotifier, List<Task>>((ref) {
   return TaskNotifier();
 });
 
 class TaskNotifier extends StateNotifier<List<Task>> {
-  TaskNotifier() : super([]);
+  late Box<Task> _taskBox;
 
-  void addTask(String title, String description) {
+  TaskNotifier() : super([]) {
+    _initHive();
+  }
+
+  /// Initialize Hive and load stored tasks
+  Future<void> _initHive() async {
+    _taskBox = await Hive.openBox<Task>('tasks');
+    state = _taskBox.values.toList();
+  }
+
+  /// Add a new task with priority and date
+  void addTask(
+      String title, String description, DateTime date, String priority) {
     if (title.isNotEmpty && description.isNotEmpty) {
-      state = [...state, Task(title: title, description: description)];
+      final newTask = Task(
+          title: title,
+          description: description,
+          date: date,
+          priority: priority);
+      _taskBox.add(newTask); // Store in Hive
+      state = [...state, newTask]; // Update Riverpod state
     }
   }
 
+  /// Toggle task completion status
   void toggleTaskCompletion(int index) {
-    state = state.asMap().entries.map((entry) {
-      final i = entry.key;
-      final task = entry.value;
-      return i == index ? task.copyWith(isCompleted: !task.isCompleted) : task;
-    }).toList();
+    if (index >= 0 && index < state.length) {
+      final updatedTask =
+          state[index].copyWith(isCompleted: !state[index].isCompleted);
+      _taskBox.putAt(index, updatedTask); // Update Hive
+      state = [...state]..[index] = updatedTask; // Update Riverpod state
+    }
+  }
+
+  /// Delete a task
+  void deleteTask(int index) {
+    if (index >= 0 && index < state.length) {
+      _taskBox.deleteAt(index); // Remove from Hive
+      state = [...state]..removeAt(index); // Update Riverpod state
+    }
   }
 }

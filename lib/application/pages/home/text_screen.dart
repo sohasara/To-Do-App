@@ -108,8 +108,21 @@ class TextScreen extends ConsumerWidget {
                   final description = descriptionController.text.trim();
 
                   if (title.isNotEmpty && description.isNotEmpty) {
-                    ref.read(taskProvider.notifier).addTask(title, description);
+                    ref.read(taskProvider.notifier).addTask(
+                          title,
+                          description,
+                          DateTime.now(),
+                          selectedPriority,
+                        );
                     Navigator.pop(context);
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const Dialog(
+                            child: Text("fill the fields"),
+                          );
+                        });
                   }
                 },
                 child: const Text(
