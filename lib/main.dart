@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do/application/pages/bottom/bottom_bar.dart';
+import 'package:to_do/data/add_task_db.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  // Hive.registerAdapter(TaskAdapter());
+  Hive.registerAdapter(TaskAdapter());
   runApp(const ProviderScope(child: MyApp()));
 }
 
