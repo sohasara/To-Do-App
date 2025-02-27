@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:to_do/application/pages/home/task_state.dart';
+import 'package:to_do/application/pages/home/home_riverpod/task_state.dart';
 import 'package:to_do/application/pages/home/text_screen.dart';
 
 class HomePage extends ConsumerWidget {
