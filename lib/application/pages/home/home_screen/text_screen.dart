@@ -109,12 +109,13 @@ class TextScreen extends StatelessWidget {
                       onPressed: () {
                         final title = taskController.text.trim();
                         final description = descriptionController.text.trim();
+                        final now = DateTime.now(); // Store as DateTime
 
                         if (title.isNotEmpty && description.isNotEmpty) {
                           ref.read(taskProvider.notifier).addTask(
                                 title,
                                 description,
-                                DateTime.now(),
+                                now, // Store raw DateTime, not formatted string
                                 selectedPriority,
                               );
                           Navigator.pop(context);
@@ -123,7 +124,7 @@ class TextScreen extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return const Dialog(
-                                  child: Text("fill the fields"),
+                                  child: Text("Fill the fields"),
                                 );
                               });
                         }
