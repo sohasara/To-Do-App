@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:to_do/application/pages/home/home_riverpod/task_state.dart';
 
-import 'home_riverpod/text_area_state.dart';
+import '../home_riverpod/text_area_state.dart';
 
 class TextScreen extends StatelessWidget {
   const TextScreen({super.key});
