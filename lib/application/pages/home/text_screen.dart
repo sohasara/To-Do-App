@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:to_do/application/pages/home/home_riverpod/task_state.dart';
-
+import 'home_riverpod/task_state.dart';
 import 'home_riverpod/text_area_state.dart';
 
 class TextScreen extends ConsumerWidget {
@@ -10,8 +9,10 @@ class TextScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final taskController = TextEditingController();
-    final descriptionController = TextEditingController();
+    final taskController =
+        TextEditingController(text: ref.watch(taskTitleProvider));
+    final descriptionController =
+        TextEditingController(text: ref.watch(taskDescriptionProvider));
     final selectedPriority = ref.watch(priorityProvider);
 
     return Scaffold(
@@ -34,6 +35,8 @@ class TextScreen extends ConsumerWidget {
           children: [
             TextField(
               controller: taskController,
+              onChanged: (value) =>
+                  ref.read(taskTitleProvider.notifier).state = value,
               decoration: InputDecoration(
                 labelText: 'Task Title',
                 labelStyle: TextStyle(color: Colors.indigo.shade900),
@@ -49,6 +52,8 @@ class TextScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             TextField(
               controller: descriptionController,
+              onChanged: (value) =>
+                  ref.read(taskDescriptionProvider.notifier).state = value,
               decoration: InputDecoration(
                 labelText: 'Description',
                 labelStyle: TextStyle(color: Colors.indigo.shade700),
@@ -104,8 +109,8 @@ class TextScreen extends ConsumerWidget {
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 ),
                 onPressed: () {
-                  final title = taskController.text.trim();
-                  final description = descriptionController.text.trim();
+                  final title = ref.read(taskTitleProvider).trim();
+                  final description = ref.read(taskDescriptionProvider).trim();
 
                   if (title.isNotEmpty && description.isNotEmpty) {
                     ref.read(taskProvider.notifier).addTask(
@@ -114,13 +119,16 @@ class TextScreen extends ConsumerWidget {
                           DateTime.now(),
                           selectedPriority,
                         );
+                    // Clear text fields after adding the task
+                    ref.read(taskTitleProvider.notifier).state = '';
+                    ref.read(taskDescriptionProvider.notifier).state = '';
                     Navigator.pop(context);
                   } else {
                     showDialog(
                         context: context,
                         builder: (context) {
                           return const Dialog(
-                            child: Text("fill the fields"),
+                            child: Text("Fill the fields"),
                           );
                         });
                   }
