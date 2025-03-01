@@ -25,6 +25,45 @@ class TextDetailsPage extends StatelessWidget {
           ),
         ),
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(13.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Description:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Container(
+              height: 200,
+              width: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.indigo.shade300,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            Text(
+              'Date:$date',
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
