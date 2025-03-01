@@ -57,7 +57,11 @@ class HomePage extends ConsumerWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const TextDetailsPage();
+                            return TextDetailsPage(
+                              tittle: task.title,
+                              description: task.description,
+                              date: formattedDate,
+                            );
                           },
                         ),
                       );
