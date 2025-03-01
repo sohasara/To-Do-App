@@ -44,7 +44,7 @@ class HomePage extends ConsumerWidget {
               itemCount: tasks.length,
               itemBuilder: (context, index) {
                 final task = tasks[index];
-                final formatHour = DateFormat('HH:mm').format(task.date);
+                // final formatHour = DateFormat('HH:mm').format(task.date);
                 final formattedDate =
                     DateFormat('dd-MM-yyyy').format(task.date);
 
