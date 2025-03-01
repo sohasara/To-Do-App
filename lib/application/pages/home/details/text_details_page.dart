@@ -4,12 +4,15 @@ class TextDetailsPage extends StatelessWidget {
   final String tittle;
   final String description;
   final String date;
+  final String priority;
 
-  const TextDetailsPage(
-      {super.key,
-      required this.tittle,
-      required this.description,
-      required this.date});
+  const TextDetailsPage({
+    super.key,
+    required this.tittle,
+    required this.description,
+    required this.date,
+    required this.priority,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +60,12 @@ class TextDetailsPage extends StatelessWidget {
             ),
             Text(
               'Date:$date',
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            Text(
+              'priority:$priority',
               style: const TextStyle(
                 fontSize: 20,
               ),

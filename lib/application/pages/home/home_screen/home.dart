@@ -61,6 +61,7 @@ class HomePage extends ConsumerWidget {
                               tittle: task.title,
                               description: task.description,
                               date: formattedDate,
+                              priority: task.priority,
                             );
                           },
                         ),
