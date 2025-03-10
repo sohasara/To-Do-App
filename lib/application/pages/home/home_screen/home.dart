@@ -91,7 +91,7 @@ class HomePage extends ConsumerWidget {
                           ),
                         ),
                         subtitle: Text(
-                          formattedDate,
+                          'Finishing Date: $formattedDate',
                         ),
                         leading: Checkbox(
                           value: task.isCompleted,
