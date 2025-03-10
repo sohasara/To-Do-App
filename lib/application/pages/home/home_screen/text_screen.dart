@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart'; // For formatting dates
 
 import 'package:to_do/application/pages/home/home_riverpod/task_state.dart';
 
@@ -12,6 +13,7 @@ class TextScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final taskController = TextEditingController();
     final descriptionController = TextEditingController();
+    final finishingDateController = TextEditingController();
 
     return Scaffold(
       backgroundColor: Colors.indigo.shade50,
@@ -62,6 +64,38 @@ class TextScreen extends StatelessWidget {
               maxLines: 3,
             ),
             const SizedBox(height: 20),
+            TextField(
+              controller: finishingDateController,
+              readOnly: true, // Prevent manual input
+              decoration: InputDecoration(
+                labelText: 'Finishing Date',
+                hintText: 'Select a date',
+                labelStyle: TextStyle(color: Colors.indigo.shade900),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.calendar_today),
+                  onPressed: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (pickedDate != null) {
+                      finishingDateController.text =
+                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                    }
+                  },
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.indigo),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
             const Text(
               'Priority',
               style: TextStyle(
@@ -109,25 +143,57 @@ class TextScreen extends StatelessWidget {
                       onPressed: () {
                         final title = taskController.text.trim();
                         final description = descriptionController.text.trim();
-                        final now = DateTime.now(); // Store as DateTime
+                        final dateText = finishingDateController.text.trim();
 
-                        if (title.isNotEmpty && description.isNotEmpty) {
-                          ref.read(taskProvider.notifier).addTask(
-                                title,
-                                description,
-                                now, // Store raw DateTime, not formatted string
-                                selectedPriority,
-                              );
-                          Navigator.pop(context);
-                        } else {
+                        if (title.isEmpty ||
+                            description.isEmpty ||
+                            dateText.isEmpty) {
                           showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const Dialog(
-                                  child: Text("Fill the fields"),
-                                );
-                              });
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Missing Fields"),
+                              content: const Text(
+                                  "Please fill all fields before adding a task."),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("OK"),
+                                ),
+                              ],
+                            ),
+                          );
+                          return;
                         }
+
+                        DateTime? finishingDate;
+                        try {
+                          finishingDate = DateTime.parse(dateText);
+                        } catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Invalid Date"),
+                              content: const Text(
+                                  "Please enter a valid date in the format YYYY-MM-DD."),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("OK"),
+                                ),
+                              ],
+                            ),
+                          );
+                          return;
+                        }
+
+                        ref.read(taskProvider.notifier).addTask(
+                              title,
+                              description,
+                              finishingDate,
+                              selectedPriority,
+                            );
+
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         'Add Task',
