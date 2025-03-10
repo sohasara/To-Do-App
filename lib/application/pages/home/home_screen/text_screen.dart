@@ -151,9 +151,16 @@ class TextScreen extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: const Text("Missing Fields"),
+                              title: const Text(
+                                "Missing Fields",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                ),
+                              ),
                               content: const Text(
-                                  "Please fill all fields before adding a task."),
+                                "Please fill all fields before adding a task.",
+                              ),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
