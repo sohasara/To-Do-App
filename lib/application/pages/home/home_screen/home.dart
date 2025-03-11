@@ -44,7 +44,10 @@ class HomePage extends ConsumerWidget {
               itemCount: tasks.length,
               itemBuilder: (context, index) {
                 final task = tasks[index];
-                // final formatHour = DateFormat('HH:mm').format(task.date);
+                final currentDate = DateTime.now();
+                final currentdate =
+                    DateFormat('dd-MM-yyyy').format(currentDate);
+                final formattedTime = DateFormat('hh:mm a').format(currentDate);
                 final formattedDate =
                     DateFormat('dd-MM-yyyy').format(task.date);
 
@@ -60,8 +63,10 @@ class HomePage extends ConsumerWidget {
                             return TextDetailsPage(
                               tittle: task.title,
                               description: task.description,
-                              date: formattedDate,
+                              dateF: formattedDate,
                               priority: task.priority,
+                              formatHour: currentdate,
+                              currenttime: formattedTime,
                             );
                           },
                         ),

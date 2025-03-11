@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 class TextDetailsPage extends StatelessWidget {
   final String tittle;
   final String description;
-  final String date;
+  final String dateF;
   final String priority;
+  final String formatHour;
+  final String currenttime;
 
   const TextDetailsPage({
     super.key,
     required this.tittle,
     required this.description,
-    required this.date,
+    required this.dateF,
     required this.priority,
+    required this.formatHour,
+    required this.currenttime,
   });
 
   @override
@@ -59,7 +63,19 @@ class TextDetailsPage extends StatelessWidget {
               ),
             ),
             Text(
-              'Date:$date',
+              'Starting Date:$currenttime',
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            Text(
+              'Starting Time:$formatHour',
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            Text(
+              'Finishing Date:$dateF',
               style: const TextStyle(
                 fontSize: 20,
               ),
