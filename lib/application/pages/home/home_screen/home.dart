@@ -16,9 +16,14 @@ class HomePage extends ConsumerWidget {
       drawer: const Drawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const TextScreen();
-          }));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const TextScreen();
+              },
+            ),
+          );
         },
         shape: const CircleBorder(),
         backgroundColor: Colors.indigo.shade300,
