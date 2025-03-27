@@ -5,8 +5,6 @@ class TextDetailsPage extends StatelessWidget {
   final String description;
   final String dateF;
   final String priority;
-  final String formatHour;
-  final String currenttime;
 
   const TextDetailsPage({
     super.key,
@@ -14,8 +12,6 @@ class TextDetailsPage extends StatelessWidget {
     required this.description,
     required this.dateF,
     required this.priority,
-    required this.formatHour,
-    required this.currenttime,
   });
 
   @override
@@ -62,18 +58,7 @@ class TextDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              'Starting Date:$currenttime',
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Text(
-              'Starting Time:$formatHour',
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
+            const SizedBox(height: 10),
             Text(
               'Finishing Date:$dateF',
               style: const TextStyle(
