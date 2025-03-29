@@ -71,12 +71,22 @@ class TextDetailsPage extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
-                'Finishing Date: $dateF',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  const Text(
+                    'Finishing Date: ',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    dateF,
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 10),
