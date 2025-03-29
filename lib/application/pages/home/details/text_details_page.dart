@@ -41,7 +41,7 @@ class TextDetailsPage extends StatelessWidget {
               ),
             ),
             Container(
-              height: 200,
+              height: 100,
               width: double.infinity,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -55,6 +55,7 @@ class TextDetailsPage extends StatelessWidget {
                 description,
                 style: const TextStyle(
                   fontSize: 18,
+                  color: Colors.indigo,
                 ),
               ),
             ),
