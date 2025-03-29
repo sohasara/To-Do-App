@@ -79,6 +79,7 @@ class TextDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 10),
             Container(
               height: 50,
               width: double.infinity,
@@ -90,11 +91,27 @@ class TextDetailsPage extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
-                'priority:$priority',
-                style: const TextStyle(
-                  fontSize: 20,
-                ),
+              child: Row(
+                children: [
+                  const Text(
+                    'priority: ',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    priority,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: priority.toLowerCase() == "high"
+                          ? Colors.red
+                          : priority.toLowerCase() == "medium"
+                              ? Colors.yellow
+                              : Colors.green,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
