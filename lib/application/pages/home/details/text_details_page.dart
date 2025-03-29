@@ -60,16 +60,41 @@ class TextDetailsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Text(
-              'Finishing Date:$dateF',
-              style: const TextStyle(
-                fontSize: 20,
+            Container(
+              height: 50,
+              width: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.indigo.shade300,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'Finishing Date: $dateF',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            Text(
-              'priority:$priority',
-              style: const TextStyle(
-                fontSize: 20,
+            Container(
+              height: 50,
+              width: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.indigo.shade300,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'priority:$priority',
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
               ),
             ),
           ],
