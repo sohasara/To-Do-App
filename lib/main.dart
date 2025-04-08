@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:to_do/application/pages/bottom/bottom_bar.dart';
+//import 'package:to_do/application/pages/bottom/bottom_bar.dart';
 import 'package:to_do/data/add_task_db.dart';
+
+import 'application/pages/log_in/login.dart';
 //import 'package:firebase_core/firebase_core.dart';
 //import 'firebase_options.dart';
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BottomBar(),
+      home: Login(),
     );
   }
 }
