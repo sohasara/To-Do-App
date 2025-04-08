@@ -49,6 +49,17 @@ class CompTask extends ConsumerWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      trailing: IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          final fullIndex =
+                              ref.read(taskProvider).indexOf(task);
+                          ref.read(taskProvider.notifier).deleteTask(fullIndex);
+                        },
+                      ),
                       subtitle: Text('Date: $formattedDate'),
                       leading: Checkbox(
                         value: task.isCompleted,
