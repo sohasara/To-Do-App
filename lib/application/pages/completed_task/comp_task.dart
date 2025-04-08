@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/application/pages/home/home_riverpod/task_state.dart';
 
+import '../home/details/text_details_page.dart';
+
 class CompTask extends ConsumerWidget {
   const CompTask({super.key});
 
@@ -35,41 +37,59 @@ class CompTask extends ConsumerWidget {
                 return Padding(
                   padding:
                       const EdgeInsets.only(top: 10.0, left: 10, right: 10),
-                  child: Container(
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.indigo.shade100,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        task.title,
-                        style: const TextStyle(
-                          decoration: TextDecoration.lineThrough,
-                          fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TextDetailsPage(
+                            index: index,
+                            tittle: task.title,
+                            description: task.description,
+                            dateF: formattedDate,
+                            priority: task.priority,
+                          ),
                         ),
+                      );
+                    },
+                    child: Container(
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.indigo.shade100,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      trailing: IconButton(
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
+                      child: ListTile(
+                        title: Text(
+                          task.title,
+                          style: const TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        onPressed: () {
-                          final fullIndex =
-                              ref.read(taskProvider).indexOf(task);
-                          ref.read(taskProvider.notifier).deleteTask(fullIndex);
-                        },
-                      ),
-                      subtitle: Text('Date: $formattedDate'),
-                      leading: Checkbox(
-                        value: task.isCompleted,
-                        onChanged: (_) {
-                          final fullIndex =
-                              ref.read(taskProvider).indexOf(task);
-                          ref
-                              .read(taskProvider.notifier)
-                              .toggleTaskCompletion(fullIndex);
-                        },
+                        trailing: IconButton(
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                          onPressed: () {
+                            final fullIndex =
+                                ref.read(taskProvider).indexOf(task);
+                            ref
+                                .read(taskProvider.notifier)
+                                .deleteTask(fullIndex);
+                          },
+                        ),
+                        subtitle: Text('Date: $formattedDate'),
+                        leading: Checkbox(
+                          value: task.isCompleted,
+                          onChanged: (_) {
+                            final fullIndex =
+                                ref.read(taskProvider).indexOf(task);
+                            ref
+                                .read(taskProvider.notifier)
+                                .toggleTaskCompletion(fullIndex);
+                          },
+                        ),
                       ),
                     ),
                   ),

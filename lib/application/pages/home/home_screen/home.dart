@@ -60,6 +60,7 @@ class HomePage extends ConsumerWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => TextDetailsPage(
+                            index: index,
                             tittle: task.title,
                             description: task.description,
                             dateF: formattedDate,

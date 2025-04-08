@@ -5,6 +5,7 @@ class TextDetailsPage extends StatelessWidget {
   final String description;
   final String dateF;
   final String priority;
+  final int index;
 
   const TextDetailsPage({
     super.key,
@@ -12,6 +13,7 @@ class TextDetailsPage extends StatelessWidget {
     required this.description,
     required this.dateF,
     required this.priority,
+    required this.index,
   });
 
   @override
