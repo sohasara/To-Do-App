@@ -10,7 +10,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tasks = ref.watch(taskProvider);
+    final tasks =
+        ref.watch(taskProvider).where((task) => !task.isCompleted).toList();
 
     return Scaffold(
       drawer: const Drawer(),
@@ -19,9 +20,7 @@ class HomePage extends ConsumerWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) {
-                return const TextScreen();
-              },
+              builder: (context) => const TextScreen(),
             ),
           );
         },
@@ -49,7 +48,6 @@ class HomePage extends ConsumerWidget {
               itemCount: tasks.length,
               itemBuilder: (context, index) {
                 final task = tasks[index];
-
                 final formattedDate =
                     DateFormat('dd-MM-yyyy').format(task.date);
 
@@ -61,14 +59,12 @@ class HomePage extends ConsumerWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) {
-                            return TextDetailsPage(
-                              tittle: task.title,
-                              description: task.description,
-                              dateF: formattedDate,
-                              priority: task.priority,
-                            );
-                          },
+                          builder: (context) => TextDetailsPage(
+                            tittle: task.title,
+                            description: task.description,
+                            dateF: formattedDate,
+                            priority: task.priority,
+                          ),
                         ),
                       );
                     },
@@ -86,24 +82,26 @@ class HomePage extends ConsumerWidget {
                             color: Colors.red.shade700,
                           ),
                           onPressed: () {
-                            ref.read(taskProvider.notifier).deleteTask(index);
+                            final fullIndex =
+                                ref.read(taskProvider).indexOf(task);
+                            ref
+                                .read(taskProvider.notifier)
+                                .deleteTask(fullIndex);
                           },
                         ),
                         title: Text(
                           task.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        subtitle: Text(
-                          'Finishing Date: $formattedDate',
-                        ),
+                        subtitle: Text('Finishing Date: $formattedDate'),
                         leading: Checkbox(
                           value: task.isCompleted,
                           onChanged: (_) {
+                            final fullIndex =
+                                ref.read(taskProvider).indexOf(task);
                             ref
                                 .read(taskProvider.notifier)
-                                .toggleTaskCompletion(index);
+                                .toggleTaskCompletion(fullIndex);
                           },
                         ),
                       ),
