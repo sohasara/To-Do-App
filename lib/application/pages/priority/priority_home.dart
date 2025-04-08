@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PriorityHome extends StatelessWidget {
+import '../home/home_riverpod/task_state.dart';
+
+class PriorityHome extends ConsumerWidget {
   const PriorityHome({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final allTasks = ref.watch(taskProvider);
+
+    final highPriority =
+        allTasks.where((task) => task.priority == 'High').toList();
+    final mediumPriority =
+        allTasks.where((task) => task.priority == 'Medium').toList();
+    final lowPriority =
+        allTasks.where((task) => task.priority == 'Low').toList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo.shade300,
