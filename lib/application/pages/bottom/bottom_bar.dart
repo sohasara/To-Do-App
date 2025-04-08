@@ -4,6 +4,8 @@ import 'package:to_do/application/pages/bottom/bottom_state.dart';
 import 'package:to_do/application/pages/completed_task/comp_task.dart';
 import 'package:to_do/application/pages/home/home_screen/home.dart';
 
+import '../priority/priority_home.dart';
+
 class BottomBar extends ConsumerWidget {
   const BottomBar({super.key});
 
@@ -13,9 +15,7 @@ class BottomBar extends ConsumerWidget {
     final List<Widget> pages = <Widget>[
       const HomePage(),
       const CompTask(),
-      const Center(
-        child: Text("add"),
-      ),
+      const PriorityHome(),
     ];
     return Scaffold(
       body: pages[selectedIndex],
