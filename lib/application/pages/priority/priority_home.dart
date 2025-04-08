@@ -7,10 +7,18 @@ class PriorityHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Priority Home'),
+        backgroundColor: Colors.indigo.shade300,
+        centerTitle: true,
+        title: const Text(
+          'Priority Home',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      body: const Center(
-        child: Text('Priority Home Page'),
+      body: Column(
+        children: [],
       ),
     );
   }
