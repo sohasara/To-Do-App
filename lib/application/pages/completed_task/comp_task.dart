@@ -15,6 +15,7 @@ class CompTask extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.indigo.shade300,
         centerTitle: true,
         title: const Text(
