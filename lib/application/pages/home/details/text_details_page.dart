@@ -119,7 +119,7 @@ class TextDetailsPage extends StatelessWidget {
                       color: priority.toLowerCase() == "high"
                           ? Colors.red
                           : priority.toLowerCase() == "medium"
-                              ? Colors.yellow
+                              ? Colors.orange
                               : Colors.green,
                     ),
                   ),
