@@ -10,6 +10,7 @@ class Login extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 204, 211, 250),
       body: Center(
         child: Container(
           height: screenHeight * 0.5,
