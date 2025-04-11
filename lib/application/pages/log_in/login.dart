@@ -45,7 +45,6 @@ class Login extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
                   controller: passwordController,
-                  // obscureText: true,
                   obscureText: true,
                   decoration: InputDecoration(
                     filled: true,
@@ -81,12 +80,7 @@ class Login extends StatelessWidget {
                     );
                     return;
                   }
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Text('Login successful'),
-                    ),
-                  );
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
