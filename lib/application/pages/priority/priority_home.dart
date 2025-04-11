@@ -82,7 +82,7 @@ class PriorityHome extends ConsumerWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              subtitle: Text('Date: ${_formatDate(task.date)}'),
+              subtitle: Text('Finishing Date: ${_formatDate(task.date)}'),
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -103,7 +103,7 @@ class PriorityHome extends ConsumerWidget {
                 ],
               ),
               trailing: IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
+                icon: Icon(Icons.delete, color: Colors.red.shade700),
                 onPressed: () {
                   final fullIndex = ref.read(taskProvider).indexOf(task);
                   ref.read(taskProvider.notifier).deleteTask(fullIndex);
