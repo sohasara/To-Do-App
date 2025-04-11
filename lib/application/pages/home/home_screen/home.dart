@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/application/pages/home/details/text_details_page.dart';
 import 'package:to_do/application/pages/home/home_riverpod/task_state.dart';
-import 'package:to_do/application/pages/home/home_screen/text_screen.dart';
+import 'package:to_do/application/pages/home/home_screen/drawer.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const TextScreen(),
+              builder: (context) => const DrawerPage(),
             ),
           );
         },
