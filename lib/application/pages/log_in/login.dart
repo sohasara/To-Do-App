@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../bottom/bottom_bar.dart';
 
 class Login extends StatelessWidget {
@@ -59,7 +60,7 @@ class Login extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (nameController.text.isEmpty ||
                       passwordController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -80,6 +81,9 @@ class Login extends StatelessWidget {
                     );
                     return;
                   }
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('isLoggedIn', true);
+                  await prefs.setString('username', nameController.text);
 
                   Navigator.push(
                     context,
