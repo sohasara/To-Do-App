@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:to_do/application/pages/home/details/text_details_page.dart';
 import 'package:to_do/application/pages/home/home_riverpod/task_state.dart';
 import 'package:to_do/application/pages/home/home_screen/drawer.dart';
+import 'package:to_do/application/pages/home/home_screen/text_screen.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -14,13 +15,15 @@ class HomePage extends ConsumerWidget {
         ref.watch(taskProvider).where((task) => !task.isCompleted).toList();
 
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: const Drawer(
+        child: DrawerPage(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const DrawerPage(),
+              builder: (context) => const TextScreen(),
             ),
           );
         },

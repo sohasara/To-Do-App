@@ -5,6 +5,33 @@ class DrawerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return Column(
+      children: [
+        const SizedBox(height: 50),
+        const Text(
+          'To Do App',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.indigo,
+          ),
+        ),
+        const SizedBox(height: 20),
+        ListTile(
+          leading: const Icon(Icons.settings),
+          title: const Text('Settings'),
+          onTap: () {
+            // Handle settings tap
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.info),
+          title: const Text('About'),
+          onTap: () {
+            // Handle about tap
+          },
+        ),
+      ],
+    );
   }
 }
