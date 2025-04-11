@@ -68,9 +68,9 @@ class CompTask extends ConsumerWidget {
                           ),
                         ),
                         trailing: IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.delete,
-                            color: Colors.red,
+                            color: Colors.red.shade700,
                           ),
                           onPressed: () {
                             final fullIndex =
@@ -80,7 +80,7 @@ class CompTask extends ConsumerWidget {
                                 .deleteTask(fullIndex);
                           },
                         ),
-                        subtitle: Text('Date: $formattedDate'),
+                        subtitle: Text('Finishing Date: $formattedDate'),
                         leading: Checkbox(
                           value: task.isCompleted,
                           onChanged: (_) {
