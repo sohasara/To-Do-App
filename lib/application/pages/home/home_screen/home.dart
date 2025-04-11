@@ -70,7 +70,6 @@ class HomePage extends ConsumerWidget {
                       );
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(8),
                       height: 80,
                       decoration: BoxDecoration(
                         color: Colors.indigo.shade100,
