@@ -86,6 +86,7 @@ class Login extends StatelessWidget {
                   await prefs.setString('username', nameController.text);
 
                   Navigator.push(
+                    // ignore: use_build_context_synchronously
                     context,
                     MaterialPageRoute(
                       builder: (context) => const BottomBar(),
