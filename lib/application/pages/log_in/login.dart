@@ -6,6 +6,8 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -26,6 +28,7 @@ class Login extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
+                  controller: nameController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -41,6 +44,8 @@ class Login extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
+                  controller: passwordController,
+                  // obscureText: true,
                   obscureText: true,
                   decoration: InputDecoration(
                     filled: true,
@@ -56,6 +61,32 @@ class Login extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
+                  if (nameController.text.isEmpty ||
+                      passwordController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text('Please fill in all fields'),
+                      ),
+                    );
+                    return;
+                  }
+                  if (nameController.text != 'admin' ||
+                      passwordController.text != 'admin') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text('Invalid credentials'),
+                      ),
+                    );
+                    return;
+                  }
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text('Login successful'),
+                    ),
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
