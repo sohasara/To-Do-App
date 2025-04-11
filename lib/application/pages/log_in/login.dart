@@ -15,7 +15,7 @@ class Login extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 204, 211, 250),
       body: Center(
         child: Container(
-          height: screenHeight * 0.5,
+          height: screenHeight * 0.4,
           width: screenWidth * 0.85,
           padding: const EdgeInsets.symmetric(vertical: 30),
           decoration: BoxDecoration(
